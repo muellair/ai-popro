@@ -14,9 +14,15 @@ RUN apt-get update && apt-get install -y \
 
 # Create non-root user (important for VS Code + Docker)
 RUN useradd -ms /bin/bash dev
-USER dev
+
+# Make workspace and copy requirements into the image (so pip can see it)
 WORKDIR /workspace
+COPY --chown=dev:dev requirements.txt /workspace/
+
+USER dev
+
+RUN pip install --no-cache-dir --upgrade pip \
+  && pip install --no-cache-dir -r requirements.txt
 
 # Python tooling
 ENV PATH="/home/dev/.local/bin:$PATH"
-
