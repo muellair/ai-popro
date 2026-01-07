@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 import warnings
 
-# attempts to get rid of warnings:
+# attempts to get rid of harmless warnings from tensorflow:
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 warnings.filterwarnings("ignore")
 
@@ -12,20 +12,35 @@ DATA = "data/preprocessed/training_data.csv"
 MODEL_OUT = Path("learningBase/currentAiSolution.keras")
 MODEL_OUT.parent.mkdir(exist_ok=True)
 
+
 df = pd.read_csv(DATA)
 
-X = df.drop(columns=["target", "bundesland", "year"]).values
+df_x = df.drop(columns=["target", "bundesland", "year"]) # NOTE: drop "year-normalized"? cf. preprocess: if dropped here, do not normalize "year" in preprocess.py at all
+X = df_x.values
 
+
+# rescale targets for efficient training, add rescaling layer only applying at application time
 y_mean = df["target"].mean()
 y_std = df["target"].std()
 y = (df["target"] - y_mean) / y_std
 
+class RescaleLayer(tf.keras.layers.Layer):
+    def __init__(self, mean, std):
+        super().__init__()
+        self.mean = mean
+        self.std = std
+    def call(self, inputs, training=False):
+        if training:
+            return inputs  # pass through during training
+        else:
+            return inputs * self.std + self.mean
 
 model = tf.keras.Sequential([
     tf.keras.Input(shape=(X.shape[1],)),
     tf.keras.layers.Dense(16, activation="relu"),
     tf.keras.layers.Dense(8, activation="relu"),
-    tf.keras.layers.Dense(1)
+    tf.keras.layers.Dense(1),
+    RescaleLayer(y_mean, y_std),
 ])
 
 model.compile(
