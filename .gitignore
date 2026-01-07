@@ -4,3 +4,6 @@ __pycache__/
 *.log
 /tmp/
 TaskCollectionAIBAS.pdf
+.~lock.*.csv#
+*.csv
+*.keras
