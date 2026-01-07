@@ -31,3 +31,29 @@ Changes to be persisted in docker images should happen in the Dockerfile as sing
 - at every vscode restart: open project root, `Dev Containers: Rebuild and Reopen in Container`
 - container logs: `Dev Containers: Show Container Log`
 - in case image `aibas-dev` was created with plain docker commands, cf. https://stackoverflow.com/questions/74217946/how-can-i-use-a-local-image-using-vscode-devcontainer for how to open the already-built image with VSCode
+
+
+
+## Data Origin
+The dataset was obtained from the German Federal Statistical Office (Destatis),
+table **12411-0010 – Population: Federal States**, via the GENESIS online system.
+
+© Statistisches Bundesamt (Destatis)
+
+## Models
+- Neural Network: TensorFlow/Keras
+- Linear Baseline: OLS regression using Statsmodels
+
+Both models are trained and evaluated on identical data splits.
+
+## Ownership
+This repository was created by Jonathan Kinkel and Felix Müller.
+
+## Course Context
+This project was created as part of the course  
+**“M. Grum: Advanced AI-based Application Systems”**  
+held by the **Junior Chair for Business Information Science, esp. AI-based Application Systems**  
+at the **University of Potsdam**.
+
+## License
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
