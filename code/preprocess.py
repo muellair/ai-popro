@@ -209,14 +209,18 @@ def main():
     feature_cols = [c for c in df.columns if c.startswith("x_t-")] + ["year"]
     df["year-unnormalized"] = df["year"]
     df_norm, _ = normalize_features(df, feature_cols)
-    df.rename({"year": "year-normalized", "year-unnormalized": "year"})
+    df = df.rename({"year": "year-normalized", "year-unnormalized": "year"})
 
-    # 5) Shuffle and split
-    df_norm = df_norm.sample(frac=1.0, random_state=RANDOM_SEED).reset_index(drop=True)
-
-    split_idx = int(len(df_norm) * TRAIN_SPLIT)
-    train_df = df_norm.iloc[:split_idx]
-    test_df = df_norm.iloc[split_idx:]
+    # 5) Stratify and split
+    train_list = []
+    test_list = []
+    for _, group in df_norm.groupby("bundesland"):
+        group_shuffled = group.sample(frac=1.0, random_state=RANDOM_SEED).reset_index(drop=True)
+        split_idx = int(len(group_shuffled) * TRAIN_SPLIT)
+        train_list.append(group_shuffled.iloc[:split_idx])
+        test_list.append(group_shuffled.iloc[split_idx:])
+    train_df = pd.concat(train_list, axis=0).reset_index(drop=True)
+    test_df = pd.concat(test_list, axis=0).reset_index(drop=True)
 
     # 6) Activation data (single test row)
     activation_df = test_df.sample(n=1, random_state=RANDOM_SEED)
