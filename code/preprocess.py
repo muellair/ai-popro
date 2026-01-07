@@ -206,8 +206,10 @@ def main():
     df = discard_outliers(df)
 
     # 4) Normalization
-    feature_cols = [c for c in df.columns if c.startswith("x_t-")]
+    feature_cols = [c for c in df.columns if c.startswith("x_t-")] + ["year"]
+    df["year-unnormalized"] = df["year"]
     df_norm, _ = normalize_features(df, feature_cols)
+    df.rename({"year": "year-normalized", "year-unnormalized": "year"})
 
     # 5) Shuffle and split
     df_norm = df_norm.sample(frac=1.0, random_state=RANDOM_SEED).reset_index(drop=True)
