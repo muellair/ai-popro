@@ -3,7 +3,7 @@ import tensorflow as tf
 from pathlib import Path
 import os
 import warnings
-
+import keras
 # attempts to get rid of harmless warnings from tensorflow:
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 warnings.filterwarnings("ignore")
@@ -24,9 +24,10 @@ y_mean = df["target"].mean()
 y_std = df["target"].std()
 y = (df["target"] - y_mean) / y_std
 
+@keras.saving.register_keras_serializable("train_nn") # required for serialization of NN
 class RescaleLayer(tf.keras.layers.Layer):
-    def __init__(self, mean, std):
-        super().__init__()
+    def __init__(self, mean, std, **kwargs):
+        super().__init__(**kwargs)
         self.mean = mean
         self.std = std
     def call(self, inputs, training=False):
@@ -34,6 +35,10 @@ class RescaleLayer(tf.keras.layers.Layer):
             return inputs  # pass through during training
         else:
             return inputs * self.std + self.mean
+    def get_config(self): # required for register_keras_serializable()
+        config = super().get_config()
+        config.update({"mean": self.mean, "std": self.std, })
+        return config
 
 model = tf.keras.Sequential([
     tf.keras.Input(shape=(X.shape[1],)),
@@ -49,7 +54,7 @@ model.compile(
     metrics=["mae"]
 )
 
-history = model.fit(X, y, epochs=120, batch_size=8, verbose=0)
+history = model.fit(X, y, epochs=100, batch_size=8, verbose=0)
 
 print(history.history["loss"])#,history.history["metrics"])
 
