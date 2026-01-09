@@ -31,3 +31,8 @@ Changes to be persisted in docker images should happen in the Dockerfile as sing
 - at every vscode restart: open project root, `Dev Containers: Rebuild and Reopen in Container`
 - container logs: `Dev Containers: Show Container Log`
 - in case image `aibas-dev` was created with plain docker commands, cf. https://stackoverflow.com/questions/74217946/how-can-i-use-a-local-image-using-vscode-devcontainer for how to open the already-built image with VSCode
+
+### References and credits
+The shapefile used for visualization purposes:
+© BKG (Jahr des letzten Datenbezugs) dl-de/by-2-0, Datenquellen: https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
+
