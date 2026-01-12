@@ -28,7 +28,7 @@ headers = {
 response = requests.post(url, headers=headers, json=payload)
 
 if response.status_code == 200:
-    zip_file_path = pathlib.Path("data/dataset.zip")
+    zip_file_path = pathlib.Path("data/population_raw.zip")
     zip_file_path.parent.mkdir(parents=True, exist_ok=True)
     with open(zip_file_path, "wb") as f:
         f.write(response.content)
