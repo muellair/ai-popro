@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  knowledge_base:
+    image: knowledgebase_aipopro
+    volumes:
+      - ai_system:/tmp
+    command: >
+      sh -c "rm -rf /tmp/knowledgeBase &&
+             mkdir -p /tmp &&
+             cp -r /knowledgeBase /tmp/"
+
+  activation_base:
+    image: activationbase_aipopro
+    volumes:
+      - ai_system:/tmp
+    command: >
+      sh -c "rm -rf /tmp/activationBase &&
+             mkdir -p /tmp &&
+             cp -r /activationBase /tmp/"
+
+  code_base:
+    image: codebase_aipopro
+    volumes:
+      - ai_system:/tmp
+    depends_on:
+      - knowledge_base
+      - activation_base
+    command: >
+      sh -c "rm -rf /tmp/codeBase &&
+             mkdir -p /tmp &&
+             cp -r /codeBase /tmp &&
+             python3 /tmp/codeBase/evaluate.py"
+
+volumes:
+  ai_system:
+    external: true

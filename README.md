@@ -8,16 +8,25 @@
 
 ## Run the application
 
+```
+docker volume create ai_system
+
+docker build -t knowledgebase_aipopro images/knowledgeBase_aipopro
+docker build -t activationbase_aipopro images/activationBase_aipopro
+docker build -t codebase_aipopro images/codeBase_aipopro
+
+docker compose -f docker-compose-ai.yml up
+docker compose -f docker-compose-ols.yml up
+```
+
+
 ### Container `aibas-dev`
 
 #### Without VSCode
-
 Create image `aibas-dev`:
-    docker build -t aibas-dev -f .devcontainer/Dockerfile .
+    `docker build -t aibas-dev -f .devcontainer/Dockerfile .`
 Run container (Interactive + TTY), with current working directory mounted in the container at `/workspace`:
-    docker run -it --rm \
-      -v $(pwd):/workspace \
-      aibas-dev bash
+    `docker run -it --rm -v $(pwd):/workspace aibas-dev bash`
 
 
 ## Develop
@@ -50,6 +59,24 @@ table **12411-0010 – Population: Federal States**, via the GENESIS online syst
 
 Both models are trained and evaluated on identical data splits.
 
+
+## Repository structure (as assumd by Dockerfiles/docker-compose.yml)
+
+```
+/tmp/
+ ├── knowledgeBase/
+ │    ├── currentAiSolution.keras
+ │    ├── currentOlsSolution.pkl
+ │    └── README.md
+ ├── activationBase/
+ │    ├── activation_data.csv
+ │    └── README.md
+ └── codeBase/
+      ├── evaluate.py
+      └── README.md
+```
+
+
 ## Ownership
 This repository was created by Jonathan Kinkel and Felix Müller.
 
@@ -61,3 +88,5 @@ at the **University of Potsdam**.
 
 ## License
 This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
+
