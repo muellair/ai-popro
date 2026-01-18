@@ -8,17 +8,28 @@
 
 ## Run the application
 
+From the project's root directory, run:
 ```
 docker volume create ai_system
 
-docker build -t knowledgebase_aipopro images/knowledgeBase_aipopro
-docker build -t activationbase_aipopro images/activationBase_aipopro
-docker build -t codebase_aipopro images/codeBase_aipopro
+docker build \
+  -f images/knowledgeBase_aipopro/Dockerfile \
+  -t knowledgebase_aipopro \
+  .
+docker build -t learningbase_aipopro -f images/learningBase_aipopro/Dockerfile .
+docker build -t activationbase_aipopro -f images/activationBase_aipopro/Dockerfile .
+docker build -t codebase_aipopro -f images/codeBase_aipopro/Dockerfile .
 
-docker compose -f docker-compose-ai.yml up
-docker compose -f docker-compose-ols.yml up
+docker compose -f scenarios/docker-compose-ai.yaml up
+docker compose -f scenarios/docker-compose-ols.yaml up
 ```
 
+## Stop the application
+
+```
+docker-compose down
+docker volume rm ai_system
+```
 
 ### Container `aibas-dev`
 
@@ -60,7 +71,7 @@ table **12411-0010 – Population: Federal States**, via the GENESIS online syst
 Both models are trained and evaluated on identical data splits.
 
 
-## Repository structure (as assumd by Dockerfiles/docker-compose.yml)
+## Repository structure (as assumd by Dockerfiles/docker-compose.yaml)
 
 ```
 /tmp/

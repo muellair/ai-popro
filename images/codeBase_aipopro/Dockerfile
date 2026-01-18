@@ -1,18 +1,30 @@
-FROM busybox
+FROM python:3.10-slim
 
-# Install Python manually
-RUN mkdir -p /usr/local/bin
-ADD https://github.com/indygreg/python-build-standalone/releases/download/20240107/cpython-3.10.13+20240107-x86_64-unknown-linux-gnu-install_only.tar.gz /tmp/python.tar.gz
-RUN tar -xzf /tmp/python.tar.gz -C /usr/local --strip-components=1
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 
-ENV PATH=/usr/local/bin:/home/thinkpad/miniconda3/condabin:/home/thinkpad/.local/bin:/home/thinkpad/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+# Base tools
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    git \
+    curl \
+    ca-certificates \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create code directory
-RUN mkdir -p /codeBase
+# Set working directory
+WORKDIR /codeBase
 
-# Copy evaluation script
-COPY src/evaluate.py /codeBase/
-COPY README.md /codeBase/
+# Install Python dependencies
+COPY requirements.txt .
+RUN python3 -m pip install --no-cache-dir --upgrade pip \
+ && python3 -m pip install --no-cache-dir -r requirements.txt
 
-CMD [sh]
+# Copy application code
+COPY src/evaluate.py .
+COPY src/train_nn.py .
+COPY README.md .
 
+# Default shell
+CMD ["bash"]

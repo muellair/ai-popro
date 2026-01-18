@@ -5,3 +5,8 @@
 ### Scraping
 
 - ran into HTTP error 429 on destatis website, occurred across devices in browser too, with VPN
+
+
+### 
+-docker-compose: evaluate.py needs train_nn.py
+-warning for docker compose: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion

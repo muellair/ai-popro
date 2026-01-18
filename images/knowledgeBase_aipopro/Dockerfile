@@ -1,14 +1,10 @@
 FROM busybox
 
-# Create target directory
 RUN mkdir -p /knowledgeBase
 
-# Copy models
 COPY learningBase/currentAiSolution.keras /knowledgeBase/
 COPY learningBase/currentOlsSolution.pkl /knowledgeBase/
+COPY images/knowledgeBase_aipopro/Readme.md /knowledgeBase/
 
-# Copy README
-COPY README.md /knowledgeBase/
-
-CMD [sh]
-
+CMD ["sh", "-c", "mkdir -p /tmp && cp -r /knowledgeBase /tmp/"]
+# CMD ["sh"]

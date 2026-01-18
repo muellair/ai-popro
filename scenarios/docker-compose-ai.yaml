@@ -1,14 +1,18 @@
-version: "3.9"
-
 services:
+  learning_base:
+    image: learningbase_aipopro
+    volumes:
+      - ai_system:/tmp
+    # command: >
+    #   sh -c "cp -r /tmp/learningBase /tmp/"
   knowledge_base:
     image: knowledgebase_aipopro
     volumes:
       - ai_system:/tmp
-    command: >
-      sh -c "rm -rf /tmp/knowledgeBase &&
-             mkdir -p /tmp &&
-             cp -r /knowledgeBase /tmp/"
+    # command: >
+    #   sh -c "rm -rf /tmp/knowledgeBase &&
+    #          mkdir -p /tmp &&
+    #          cp -r /knowledgeBase /tmp/"
 
   activation_base:
     image: activationbase_aipopro
@@ -30,7 +34,7 @@ services:
       sh -c "rm -rf /tmp/codeBase &&
              mkdir -p /tmp &&
              cp -r /codeBase /tmp &&
-             python3 /tmp/codeBase/evaluate.py"
+             python3 /tmp/codeBase/evaluate.py --testdatapath /tmp/learningBase/validation/test_data.csv --aimodelpath /tmp/knowledgeBase/currentAiSolution.keras --olsmodelpath /tmp/knowledgeBase/currentOlsSolution.pkl"
 
 volumes:
   ai_system:

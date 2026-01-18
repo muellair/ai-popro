@@ -4,19 +4,37 @@ import pickle
 import statsmodels.api as sm
 from sklearn.metrics import mean_squared_error
 from train_nn import RescaleLayer # necessary for deserialization of NN model
+import argparse
+import sys
 
-TEST = "data/preprocessed/test_data.csv"
+cli_parser = argparse.ArgumentParser()
+cli_parser.add_argument(
+    "--testdatapath",
+    nargs="?",
+    default="data/preprocessed/test_data.csv"
+)
+cli_parser.add_argument(
+    "--aimodelpath",
+    nargs="?",
+    default="learningBase/currentAiSolution.keras"
+)
+cli_parser.add_argument(
+    "--olsmodelpath",
+    nargs="?",
+    default="learningBase/currentOlsSolution.pkl"
+)
+args = cli_parser.parse_args()#sys.argv)
 
-df = pd.read_csv(TEST)
+df = pd.read_csv(args.testdatapath)
 X = df.drop(columns=["target", "bundesland", "year"])
 y = df["target"]
 
 # NN
-nn = tf.keras.models.load_model("learningBase/currentAiSolution.keras")
+nn = tf.keras.models.load_model(args.aimodelpath)
 nn_pred = nn.predict(X.values, verbose=0).flatten()
 
 # OLS
-with open("learningBase/currentOlsSolution.pkl", "rb") as f:
+with open(args.olsmodelpath, "rb") as f:
     ols = pickle.load(f)
 
 X_ols = sm.add_constant(X)
