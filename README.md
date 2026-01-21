@@ -14,14 +14,14 @@ docker volume create ai_system
 
 docker build \
   -f images/knowledgeBase_aipopro/Dockerfile \
-  -t knowledgebase_aipopro \
+  -t muellairnot00/knowledgebase_aipopro \
   .
-docker build -t learningbase_aipopro -f images/learningBase_aipopro/Dockerfile .
-docker build -t activationbase_aipopro -f images/activationBase_aipopro/Dockerfile .
-docker build -t codebase_aipopro -f images/codeBase_aipopro/Dockerfile .
+docker build -t muellairnot00/learningbase_aipopro -f images/learningBase_aipopro/Dockerfile .
+docker build -t muellairnot00/activationbase_aipopro -f images/activationBase_aipopro/Dockerfile .
+docker build -t muellairnot00/codebase_aipopro -f images/codeBase_aipopro/Dockerfile .
 
-docker compose -f scenarios/docker-compose-ai.yaml up
-docker compose -f scenarios/docker-compose-ols.yaml up
+docker compose -f scenarios/neural-network/docker-compose-ai.yaml up
+docker compose -f scenarios/ordinary-least-squares/docker-compose-ols.yaml up
 ```
 
 ## Stop the application

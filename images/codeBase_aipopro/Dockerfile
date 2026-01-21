@@ -26,5 +26,8 @@ COPY src/evaluate.py .
 COPY src/train_nn.py .
 COPY README.md .
 
+# silence noisy tensorflow logging
+ENV TF_CPP_MIN_LOG_LEVEL=3
+
 # Default shell
 CMD ["bash"]
