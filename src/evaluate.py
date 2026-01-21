@@ -9,36 +9,41 @@ import sys
 
 cli_parser = argparse.ArgumentParser()
 cli_parser.add_argument(
-    "--testdatapath",
+    "--datapath",
     nargs="?",
     default="data/preprocessed/test_data.csv"
 )
-cli_parser.add_argument(
-    "--aimodelpath",
-    nargs="?",
-    default="learningBase/currentAiSolution.keras"
+cli_parser.add_argument( # optional argument  with default "None"
+    "--aimodelpath", 
+    # nargs="?",
+    # default="learningBase/currentAiSolution.keras"
 )
-cli_parser.add_argument(
+cli_parser.add_argument( # optional argument  with default "None"
     "--olsmodelpath",
-    nargs="?",
-    default="learningBase/currentOlsSolution.pkl"
+    # nargs="?",
+    # default="learningBase/currentOlsSolution.pkl"
 )
 args = cli_parser.parse_args()#sys.argv)
 
-df = pd.read_csv(args.testdatapath)
+df = pd.read_csv(args.datapath)
 X = df.drop(columns=["target", "bundesland", "year"])
 y = df["target"]
 
-# NN
-nn = tf.keras.models.load_model(args.aimodelpath)
-nn_pred = nn.predict(X.values, verbose=0).flatten()
 
-# OLS
-with open(args.olsmodelpath, "rb") as f:
-    ols = pickle.load(f)
+print(f"Groundtruth Target Value: {float(y.iat[0])}")
 
-X_ols = sm.add_constant(X)
-ols_pred = ols.predict(X_ols)
+if args.aimodelpath is not None:
+    nn = tf.keras.models.load_model(args.aimodelpath)
+    nn_pred = nn.predict(X.values, verbose=0).flatten()
+    print(f"ANN-Predicted Target Value: {nn_pred[0]}")
 
-print("NN MSE :", mean_squared_error(y, nn_pred))
-print("OLS MSE:", mean_squared_error(y, ols_pred))
+if args.olsmodelpath is not None:
+    with open(args.olsmodelpath, "rb") as f:
+        ols = pickle.load(f)
+    X_ols = sm.add_constant(X, has_constant="add")
+    ols_pred = ols.predict(X_ols)
+    print(f"OLS-Predicted Target Value: {ols_pred[0]}")
+# print("NN MSE :", mean_squared_error(y, nn_pred))
+# print("OLS MSE:", mean_squared_error(y, ols_pred))
+
+
