@@ -24,7 +24,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip \
 # Copy application code
 COPY src/evaluate.py .
 COPY src/train_nn.py .
-COPY README.md .
+COPY images/codeBase_aipopro/README.md .
 
 # silence noisy tensorflow logging
 ENV TF_CPP_MIN_LOG_LEVEL=3

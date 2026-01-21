@@ -60,7 +60,7 @@ The shapefile used for visualization purposes:
 
 ## Data Origin
 The dataset was obtained from the German Federal Statistical Office (Destatis),
-table **12411-0010 – Population: Federal States**, via the GENESIS online system.
+table **12411-0010 – Population: Federal States**, via the GENESIS online system (https://www-genesis.destatis.de/datenbank/online/table/12411-0010/table-toolbar).
 
 © Statistisches Bundesamt (Destatis)
 
