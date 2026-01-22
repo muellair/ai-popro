@@ -4,6 +4,10 @@ from pathlib import Path
 import os
 import warnings
 import keras
+from keras.layers import Dropout
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+
 # attempts to get rid of harmless warnings from tensorflow:
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 warnings.filterwarnings("ignore")
@@ -12,25 +16,32 @@ DATA = "data/preprocessed/training_data.csv"
 MODEL_OUT = Path("learningBase/currentAiSolution.keras")
 MODEL_OUT.parent.mkdir(exist_ok=True)
 
-
+# load data
 df = pd.read_csv(DATA)
 
-df_x = df.drop(columns=["target", "bundesland", "year"]) # NOTE: drop "year-normalized"? cf. preprocess: if dropped here, do not normalize "year" in preprocess.py at all
-X = df_x.values
+df_y = df.target
+df_X = df.drop(columns=["target", "bundesland", "year"])
+df_X= df_X.values
 
+# Split X and Y values into training and validation
+X_train, X_val = train_test_split(df_X, test_size=0.2, shuffle=False)
+Y_train, Y_val = train_test_split(df_y, test_size=0.2, shuffle=False)
 
 # rescale targets for efficient training, add rescaling layer only applying at application time
-y_mean = df["target"].mean()
-y_std = df["target"].std()
-y = (df["target"] - y_mean) / y_std
+Y_train = (Y_train - Y_train.mean()) / Y_train.std()
+Y_val = (Y_val - Y_val.mean()) / Y_val.std()
 
+
+print(X_train.shape[1])
 @keras.saving.register_keras_serializable("train_nn") # required for serialization of NN
 class RescaleLayer(tf.keras.layers.Layer):
     def __init__(self, mean, std, **kwargs):
         super().__init__(**kwargs)
         self.mean = mean
         self.std = std
-    def call(self, inputs, training=False):
+    def call(self, inputs, training=False, validation=False):
+        if validation:
+            return inputs
         if training:
             return inputs  # pass through during training
         else:
@@ -41,22 +52,34 @@ class RescaleLayer(tf.keras.layers.Layer):
         return config
 
 model = tf.keras.Sequential([
-    tf.keras.Input(shape=(X.shape[1],)),
-    tf.keras.layers.Dense(16, activation="relu"),
+    tf.keras.Input(shape=(X_train.shape[1],)),
+    tf.keras.layers.Dense(8, activation="relu"),
+    Dropout(0.3),
     tf.keras.layers.Dense(8, activation="relu"),
     tf.keras.layers.Dense(1),
-    RescaleLayer(y_mean, y_std),
+    RescaleLayer(Y_train.mean(), Y_train.std()),
 ])
 
 model.compile(
     optimizer="adam",
     loss="mse",
-    metrics=["mae"]
+    
 )
 
-history = model.fit(X, y, epochs=100, batch_size=8, verbose=0)
 
-print(history.history["loss"])#,history.history["metrics"])
+model.summary()
+history = model.fit(X_train, Y_train, epochs=150, batch_size=8, verbose=1, validation_data=(X_val, Y_val))
+
+loss = history.history["loss"]
+val_loss = history.history["val_loss"]
+
+ax, fig = plt.subplots()
+plt.plot(loss, label="Training Loss")
+plt.plot(val_loss, label="Validation Loss")
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.legend()
+plt.savefig("train_val_loss.png")
 
 model.save(MODEL_OUT)
 
