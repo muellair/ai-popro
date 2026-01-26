@@ -68,7 +68,7 @@ model.compile(
 
 
 model.summary()
-history = model.fit(X_train, Y_train, epochs=150, batch_size=8, verbose=1, validation_data=(X_val, Y_val))
+history = model.fit(X_train, Y_train, epochs=100, batch_size=8, verbose=1, validation_data=(X_val, Y_val))
 
 loss = history.history["loss"]
 val_loss = history.history["val_loss"]

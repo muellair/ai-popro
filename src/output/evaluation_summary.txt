@@ -1,0 +1,222 @@
+Train/Validation summary:
+
+model:
+	layers:
+		Input(input shape), Dense(8, relu), Dropout,(0,3), Dense(8, relu), Output
+
+	params:
+		number of training epochs: 	150
+		batch_size: 			8
+		learning_rate: 			0.005
+		optimizer: 			'adam'
+		loss_func: 			'mse'
+
+eval:
+	final train loss: 			1.334
+	final validation loss: 			0.9989
+
+
+
+
+loss throughout training (see also '/src/output/train_val_loss.png'):
+
+Epoch 1/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - loss: 314310.1875 - val_loss: 96219.1406
+Epoch 2/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 995us/step - loss: 38031.2344 - val_loss: 8499.8262
+Epoch 3/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 998us/step - loss: 8051.6240 - val_loss: 588.7665
+Epoch 4/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 980us/step - loss: 5825.9541 - val_loss: 510.8895
+Epoch 5/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 956us/step - loss: 5326.9453 - val_loss: 577.5803
+Epoch 6/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 977us/step - loss: 4247.7114 - val_loss: 522.5248
+Epoch 7/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 967us/step - loss: 3420.1028 - val_loss: 739.5253
+Epoch 8/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 962us/step - loss: 2856.9011 - val_loss: 333.3475
+Epoch 9/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - loss: 2560.3992 - val_loss: 438.7387
+Epoch 10/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 1762.0137 - val_loss: 179.0821
+Epoch 11/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 1707.9635 - val_loss: 243.8793
+Epoch 12/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 1383.0707 - val_loss: 386.7335
+Epoch 13/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 973us/step - loss: 1150.9579 - val_loss: 211.0464
+Epoch 14/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 957us/step - loss: 880.7788 - val_loss: 164.8221
+Epoch 15/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 964us/step - loss: 821.1049 - val_loss: 331.0010
+Epoch 16/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 998us/step - loss: 626.6233 - val_loss: 246.6709
+Epoch 17/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 954us/step - loss: 584.6088 - val_loss: 158.8336
+Epoch 18/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 988us/step - loss: 574.3923 - val_loss: 219.9061
+Epoch 19/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 960us/step - loss: 394.9509 - val_loss: 95.6684
+Epoch 20/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 965us/step - loss: 324.2717 - val_loss: 63.1421
+Epoch 21/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 964us/step - loss: 381.3117 - val_loss: 134.5356
+Epoch 22/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 933us/step - loss: 293.6750 - val_loss: 45.4615
+Epoch 23/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 952us/step - loss: 308.5112 - val_loss: 122.6016
+Epoch 24/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 929us/step - loss: 248.5876 - val_loss: 83.6543
+Epoch 25/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 943us/step - loss: 232.7365 - val_loss: 83.5379
+Epoch 26/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 948us/step - loss: 198.4624 - val_loss: 38.7261
+Epoch 27/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 962us/step - loss: 230.7449 - val_loss: 59.9959
+Epoch 28/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 958us/step - loss: 211.2112 - val_loss: 99.2627
+Epoch 29/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 956us/step - loss: 167.4192 - val_loss: 35.5704
+Epoch 30/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 935us/step - loss: 164.8147 - val_loss: 96.9483
+Epoch 31/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 956us/step - loss: 153.5616 - val_loss: 67.2251
+Epoch 32/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 953us/step - loss: 126.7703 - val_loss: 40.6424
+Epoch 33/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 956us/step - loss: 129.2217 - val_loss: 76.1614
+Epoch 34/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 944us/step - loss: 111.1373 - val_loss: 29.6144
+Epoch 35/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 968us/step - loss: 129.0217 - val_loss: 67.5008
+Epoch 36/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 956us/step - loss: 105.4834 - val_loss: 30.4309
+Epoch 37/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 978us/step - loss: 100.4971 - val_loss: 50.7747
+Epoch 38/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 104.7304 - val_loss: 21.7227
+Epoch 39/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1000us/step - loss: 80.8246 - val_loss: 25.5137
+Epoch 40/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 988us/step - loss: 63.7620 - val_loss: 30.5999
+Epoch 41/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 66.7281 - val_loss: 22.2462
+Epoch 42/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 66.1167 - val_loss: 29.0344
+Epoch 43/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 946us/step - loss: 64.6144 - val_loss: 22.0286
+Epoch 44/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 956us/step - loss: 63.8203 - val_loss: 27.8034
+Epoch 45/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 935us/step - loss: 55.0746 - val_loss: 11.6982
+Epoch 46/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 941us/step - loss: 49.2357 - val_loss: 14.1018
+Epoch 47/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 961us/step - loss: 50.1736 - val_loss: 13.0276
+Epoch 48/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 948us/step - loss: 46.5436 - val_loss: 21.5096
+Epoch 49/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 943us/step - loss: 41.2688 - val_loss: 17.2223
+Epoch 50/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 950us/step - loss: 37.8424 - val_loss: 17.9681
+Epoch 51/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 954us/step - loss: 29.4190 - val_loss: 12.6230
+Epoch 52/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 948us/step - loss: 32.9573 - val_loss: 11.1291
+Epoch 53/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 954us/step - loss: 27.5814 - val_loss: 8.0912
+Epoch 54/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 967us/step - loss: 27.6452 - val_loss: 6.0718
+Epoch 55/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 983us/step - loss: 28.4586 - val_loss: 17.1890
+Epoch 56/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 962us/step - loss: 23.0298 - val_loss: 12.0913
+Epoch 57/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 957us/step - loss: 24.3749 - val_loss: 18.0112
+Epoch 58/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 959us/step - loss: 24.0570 - val_loss: 10.8639
+Epoch 59/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 949us/step - loss: 20.5073 - val_loss: 8.7030
+Epoch 60/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 942us/step - loss: 20.5803 - val_loss: 9.1820
+Epoch 61/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 938us/step - loss: 18.0237 - val_loss: 6.3939
+Epoch 62/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 959us/step - loss: 20.1845 - val_loss: 11.1572
+Epoch 63/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 949us/step - loss: 16.1474 - val_loss: 5.1852
+Epoch 64/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 962us/step - loss: 14.6710 - val_loss: 3.6003
+Epoch 65/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 948us/step - loss: 13.7995 - val_loss: 4.4093
+Epoch 66/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 957us/step - loss: 12.9088 - val_loss: 5.5531
+Epoch 67/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 942us/step - loss: 10.9813 - val_loss: 2.4203
+Epoch 68/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 974us/step - loss: 11.3295 - val_loss: 3.7896
+Epoch 69/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 932us/step - loss: 10.0504 - val_loss: 2.6920
+Epoch 70/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 933us/step - loss: 9.0335 - val_loss: 1.6965
+Epoch 71/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 945us/step - loss: 8.6907 - val_loss: 2.7456
+Epoch 72/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 957us/step - loss: 8.4282 - val_loss: 2.9302
+Epoch 73/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 941us/step - loss: 7.3038 - val_loss: 2.0685
+Epoch 74/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 940us/step - loss: 7.9080 - val_loss: 2.1543
+Epoch 75/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 973us/step - loss: 7.8507 - val_loss: 5.6227
+Epoch 76/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 968us/step - loss: 6.2396 - val_loss: 1.8092
+Epoch 77/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 5.7420 - val_loss: 1.6079
+Epoch 78/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 940us/step - loss: 5.4579 - val_loss: 2.9541
+Epoch 79/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 941us/step - loss: 4.6918 - val_loss: 2.0219
+Epoch 80/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 947us/step - loss: 4.8082 - val_loss: 2.5184
+Epoch 81/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 946us/step - loss: 3.9325 - val_loss: 2.8504
+Epoch 82/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 931us/step - loss: 4.1597 - val_loss: 1.3567
+Epoch 83/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 939us/step - loss: 3.7748 - val_loss: 1.5634
+Epoch 84/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 931us/step - loss: 3.4480 - val_loss: 2.3564
+Epoch 85/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 946us/step - loss: 3.6435 - val_loss: 2.3496
+Epoch 86/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 933us/step - loss: 3.2658 - val_loss: 2.7522
+Epoch 87/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 943us/step - loss: 3.0677 - val_loss: 1.2712
+Epoch 88/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 2.9723 - val_loss: 2.4809
+Epoch 89/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 948us/step - loss: 2.7613 - val_loss: 1.5140
+Epoch 90/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 927us/step - loss: 2.4734 - val_loss: 1.0776
+Epoch 91/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 938us/step - loss: 2.2624 - val_loss: 1.2945
+Epoch 92/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 2.0063 - val_loss: 1.1802
+Epoch 93/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 950us/step - loss: 2.0923 - val_loss: 1.2700
+Epoch 94/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 949us/step - loss: 1.8581 - val_loss: 1.7318
+Epoch 95/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 936us/step - loss: 1.7916 - val_loss: 1.3346
+Epoch 96/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 939us/step - loss: 1.8625 - val_loss: 1.8084
+Epoch 97/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 932us/step - loss: 1.6747 - val_loss: 0.9882
+Epoch 98/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 934us/step - loss: 1.6796 - val_loss: 0.9869
+Epoch 99/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 932us/step - loss: 1.4988 - val_loss: 1.0189
+Epoch 100/100
+40/40 ━━━━━━━━━━━━━━━━━━━━ 0s 930us/step - loss: 1.3340 - val_loss: 0.9989
