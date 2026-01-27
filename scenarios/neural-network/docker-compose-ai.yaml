@@ -1,8 +1,15 @@
 services:
+  volume_cleaner:
+    image: busybox
+    volumes:
+      - ai_system:/tmp
+    command: ["sh", "-c", "rm -rf /tmp/*"]
   knowledge_base:
     image: muellairnot00/knowledgebase_aipopro
     volumes:
       - ai_system:/tmp
+    depends_on:
+      - volume_cleaner
     # command: >
     #   sh -c "rm -rf /tmp/knowledgeBase &&
     #          mkdir -p /tmp &&
@@ -12,6 +19,8 @@ services:
     image: muellairnot00/activationbase_aipopro
     volumes:
       - ai_system:/tmp
+    depends_on:
+      - volume_cleaner
     # command: >
     #   sh -c "rm -rf /tmp/activationBase &&
     #          mkdir -p /tmp &&
