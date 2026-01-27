@@ -8,16 +8,36 @@
 
 ## Run the application
 
+From the project's root directory, run:
+```
+docker volume create ai_system
+
+docker build \
+  -f images/knowledgeBase_aipopro/Dockerfile \
+  -t muellairnot00/knowledgebase_aipopro \
+  .
+docker build -t muellairnot00/learningbase_aipopro -f images/learningBase_aipopro/Dockerfile .
+docker build -t muellairnot00/activationbase_aipopro -f images/activationBase_aipopro/Dockerfile .
+docker build -t muellairnot00/codebase_aipopro -f images/codeBase_aipopro/Dockerfile .
+
+docker compose -f scenarios/neural-network/docker-compose-ai.yaml up
+docker compose -f scenarios/ordinary-least-squares/docker-compose-ols.yaml up
+```
+
+## Stop the application
+
+```
+docker-compose down
+docker volume rm ai_system
+```
+
 ### Container `aibas-dev`
 
 #### Without VSCode
-
 Create image `aibas-dev`:
-    docker build -t aibas-dev -f .devcontainer/Dockerfile .
+    `docker build -t aibas-dev -f .devcontainer/Dockerfile .`
 Run container (Interactive + TTY), with current working directory mounted in the container at `/workspace`:
-    docker run -it --rm \
-      -v $(pwd):/workspace \
-      aibas-dev bash
+    `docker run -it --rm -v $(pwd):/workspace aibas-dev bash`
 
 
 ## Develop
@@ -40,7 +60,7 @@ The shapefile used for visualization purposes:
 
 ## Data Origin
 The dataset was obtained from the German Federal Statistical Office (Destatis),
-table **12411-0010 – Population: Federal States**, via the GENESIS online system.
+table **12411-0010 – Population: Federal States**, via the GENESIS online system (https://www-genesis.destatis.de/datenbank/online/table/12411-0010/table-toolbar).
 
 © Statistisches Bundesamt (Destatis)
 
@@ -49,6 +69,24 @@ table **12411-0010 – Population: Federal States**, via the GENESIS online syst
 - Linear Baseline: OLS regression using Statsmodels
 
 Both models are trained and evaluated on identical data splits.
+
+
+## Repository structure (as assumd by Dockerfiles/docker-compose.yaml)
+
+```
+/tmp/
+ ├── knowledgeBase/
+ │    ├── currentAiSolution.keras
+ │    ├── currentOlsSolution.pkl
+ │    └── README.md
+ ├── activationBase/
+ │    ├── activation_data.csv
+ │    └── README.md
+ └── codeBase/
+      ├── evaluate.py
+      └── README.md
+```
+
 
 ## Ownership
 This repository was created by Jonathan Kinkel and Felix Müller.
@@ -61,3 +99,5 @@ at the **University of Potsdam**.
 
 ## License
 This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
+

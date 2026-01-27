@@ -1,0 +1,43 @@
+services:
+  volume_cleaner:
+    image: busybox
+    volumes:
+      - ai_system:/tmp
+    command: ["sh", "-c", "rm -rf /tmp/*"]
+  knowledge_base:
+    image: muellairnot00/knowledgebase_aipopro
+    volumes:
+      - ai_system:/tmp
+    depends_on:
+      - volume_cleaner
+    # command: >
+    #   sh -c "rm -rf /tmp/knowledgeBase &&
+    #          mkdir -p /tmp &&
+    #          cp -r /knowledgeBase /tmp/"
+
+  activation_base:
+    image: muellairnot00/activationbase_aipopro
+    volumes:
+      - ai_system:/tmp
+    depends_on:
+      - volume_cleaner
+    # command: >
+    #   sh -c "rm -rf /tmp/activationBase &&
+    #          mkdir -p /tmp &&
+    #          cp -r /activationBase /tmp/"
+
+  code_base:
+    image: muellairnot00/codebase_aipopro
+    volumes:
+      - ai_system:/tmp
+    depends_on:
+      - knowledge_base
+      - activation_base
+    command: >
+      sh -c "mkdir -p /tmp &&
+             cp -r /codeBase /tmp &&
+             python3 /tmp/codeBase/evaluate.py --datapath /tmp/activationBase/activation_data.csv --olsmodelpath /tmp/knowledgeBase/currentOlsSolution.pkl"
+
+volumes:
+  ai_system:
+    external: true
