@@ -22,6 +22,8 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip \
  && python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
+# train_nn.py is only copied so that evaluate.py can access the RescaleLayer class.
+# This is needed for loading the serialized model.
 COPY src/evaluate.py .
 COPY src/train_nn.py .
 COPY images/codeBase_aipopro/README.md .
