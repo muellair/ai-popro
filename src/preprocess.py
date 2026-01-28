@@ -209,7 +209,7 @@ def main():
     feature_cols = [c for c in df.columns if c.startswith("x_t-")] + ["year"]
     df["year-unnormalized"] = df["year"]
     df_norm, _ = normalize_features(df, feature_cols)
-    df = df.rename({"year": "year-normalized", "year-unnormalized": "year"})
+    # df = df.rename({"year": "year-normalized", "year-unnormalized": "year"})
 
     # 5) Stratify and split
     train_list = []
@@ -221,6 +221,9 @@ def main():
         test_list.append(group_shuffled.iloc[split_idx:])
     train_df = pd.concat(train_list, axis=0).reset_index(drop=True)
     test_df = pd.concat(test_list, axis=0).reset_index(drop=True)
+    y_train_mean, y_train_std = train_df.target.mean(), train_df.target.std()
+    train_df["target"] = (train_df["target"] - y_train_mean) / y_train_std
+    test_df["target"] = (test_df["target"] - y_train_mean) / y_train_std
 
     # 6) Activation data (single test row)
     activation_df = test_df.sample(n=1, random_state=RANDOM_SEED)
