@@ -43,9 +43,11 @@ docker volume rm ai_system
 ## Development
 
 To reproduce the training of the ANN and the fitting of the OLS model, create a Docker container `aibas-dev`. It will contain all the needed python installation and dependencies. Please refer to the [VSCode documentation](https://code.visualstudio.com/docs/devcontainers/containers) for developing in docker containers with VSCode.
-1) Create image `aibas-dev`:
+1) Create image
+`aibas-dev`:
     `docker build -t aibas-dev -f .devcontainer/Dockerfile .`
-2) Run container (Interactive + TTY), with current working directory mounted in the container at `/workspace`:
+3) Run container (Interactive + TTY), with current working directory mounted in the container at
+`/workspace`:
     `docker run -it --rm -v $(pwd):/workspace aibas-dev bash`
 
 Changes to be persisted in docker images should happen in the Dockerfile as single source of truth: Adapt it and re-build with above commands.
