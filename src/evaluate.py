@@ -7,6 +7,7 @@ import argparse
 import sys
 import os
 import warnings
+import matplotlib.pyplot as plt
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 warnings.filterwarnings("ignore")
@@ -33,10 +34,26 @@ cli_parser.add_argument( # optional argument  with default "None"
 )
 args = cli_parser.parse_args()#sys.argv)
 
+train_dataset = pd.read_csv('data/preprocessed/training_data.csv')
 df = pd.read_csv(args.datapath)
 X = df.drop(columns=["target", "bundesland", "year"])
 y = df["target"]
 
+def plot_preds(predictions, model, X=X, y=y, df=train_dataset):
+    X = X[['x_t-1']]
+    fig = plt.figure()
+    ax1 = fig.add_subplot()
+    # plot predictions on test set
+    
+    #ax1.plot(X, predictions, color='red')
+    ax1.scatter(X.values, y.values, color='blue', s=15)
+    ax1.plot(X.values, predictions, color='red')
+    ax1.scatter([df[['x_t-1']]],df[['target']], color='blue', s=15, label='Groundtruth')
+    plt.xlabel("input")
+    plt.ylabel("prediction")
+    plt.title(f"Predictions on test set for model {model}")
+    plt.savefig(f"data_visualization/output/predictions_{model}.png")
+    return plt.show()
 
 print(f"Groundtruth Target Value: {float(y.iat[0])}")
 
@@ -46,6 +63,8 @@ if args.aimodelpath is not None:
     if args.printmse:
         print("NN MSE :", mean_squared_error(y, nn_pred))
     print(f"ANN-Predicted Target Value: {nn_pred[0]}")
+    plot_preds(nn_pred, model="ANN") 
+
 
 if args.olsmodelpath is not None:
     with open(args.olsmodelpath, "rb") as f:
@@ -55,5 +74,7 @@ if args.olsmodelpath is not None:
     if args.printmse:
         print("OLS MSE:", mean_squared_error(y, ols_pred))
     print(f"OLS-Predicted Target Value: {ols_pred[0]}")
+    plot_preds(ols_pred, model="OLS") 
+
 
 
