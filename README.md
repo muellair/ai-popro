@@ -30,6 +30,14 @@ docker compose -f scenarios/neural-network/docker-compose-ai.yaml up
 docker compose -f scenarios/ordinary-least-squares/docker-compose-ols.yaml up
 ```
 
+While explicit `docker pull` commands should not be needed, they would be:
+```
+docker pull muellairnot00/knowledgebase_aipopro
+docker pull muellairnot00/activationbase_aipopro
+docker pull muellairnot00/codebase_aipopro
+```
+
+
 ### Stop the application
 
 Once again from the project's root directory, run:
