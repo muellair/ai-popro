@@ -44,7 +44,7 @@ Once again from the project's root directory, run:
 
 ```
 docker-compose -f scenarios/neural-network/docker-compose-ai.yaml down
-docker-compose -f scenarios/neural-network/docker-compose-ols.yaml down
+docker-compose -f scenarios/ordinary-least-squares/docker-compose-ols.yaml down
 docker volume rm ai_system
 ```
 
